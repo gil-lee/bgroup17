@@ -1,0 +1,804 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="swishModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="S_Chat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="itemId" Type="int" />
+          <Property Name="uploadUser" Type="int" Nullable="false" />
+          <Property Name="requestUser" Type="int" Nullable="false" />
+          <Property Name="lastMessageDate" Type="datetime" />
+          <Property Name="chatStatus" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="requestConfirm" Type="bit" />
+          <Property Name="uploadConfirm" Type="bit" />
+          <Property Name="openChatDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="S_ConditionPrices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="condition" Type="nvarchar" MaxLength="15" />
+          <Property Name="reduction" Type="int" />
+        </EntityType>
+        <EntityType Name="S_DailySentence">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sentence" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="S_FavoriteUsers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emailLGUser" Type="varchar" MaxLength="50" />
+          <Property Name="emailFavUser" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="S_Item_New">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="120" />
+          <Property Name="image1" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="image2" Type="nvarchar(max)" />
+          <Property Name="image3" Type="nvarchar(max)" />
+          <Property Name="image4" Type="nvarchar(max)" />
+          <Property Name="numberOfPoints" Type="int" />
+          <Property Name="sizeId" Type="int" />
+          <Property Name="typeId" Type="int" />
+          <Property Name="styleId" Type="int" />
+          <Property Name="conditionId" Type="int" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="latitude" Type="float" />
+        </EntityType>
+        <EntityType Name="S_ItemPrice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" />
+          <Property Name="price" Type="int" />
+        </EntityType>
+        <EntityType Name="S_ItemSize">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="size" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="S_ItemStyle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="style" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="S_User_Items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="itemId" Type="int" />
+          <Property Name="uploadDate" Type="datetime" />
+          <Property Name="itemStatus" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="S_User_New">
+          <Key>
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="phoneNumber" Type="int" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="profilePicture" Type="nvarchar(max)" />
+          <Property Name="residence" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="radius" Type="int" Nullable="false" />
+          <Property Name="birthDate" Type="datetime" />
+          <Property Name="itemViewingMethod" Type="char" MaxLength="1" />
+          <Property Name="avatarlevel" Type="int" />
+          <Property Name="dailySentenceId" Type="int" />
+          <Property Name="numOfPoints" Type="int" Nullable="false" />
+          <Property Name="userToken" Type="nvarchar(max)" />
+          <Property Name="showItemsFeed" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="S_UserFilter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="keyWordType" Type="nvarchar" MaxLength="30" />
+          <Property Name="keyWord" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK__S_Chat__itemId__28B808A7">
+          <End Role="S_Item_New" Type="Self.S_Item_New" Multiplicity="0..1" />
+          <End Role="S_Chat" Type="Self.S_Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_Item_New">
+              <PropertyRef Name="itemId" />
+            </Principal>
+            <Dependent Role="S_Chat">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_Favorit__email__7AF13DF7">
+          <End Role="S_User_New" Type="Self.S_User_New" Multiplicity="0..1" />
+          <End Role="S_FavoriteUsers" Type="Self.S_FavoriteUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_User_New">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="S_FavoriteUsers">
+              <PropertyRef Name="emailLGUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_Favorit__email__7BE56230">
+          <End Role="S_User_New" Type="Self.S_User_New" Multiplicity="0..1" />
+          <End Role="S_FavoriteUsers" Type="Self.S_FavoriteUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_User_New">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="S_FavoriteUsers">
+              <PropertyRef Name="emailFavUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_Item_Ne__condi__53D770D6">
+          <End Role="S_ConditionPrices" Type="Self.S_ConditionPrices" Multiplicity="0..1" />
+          <End Role="S_Item_New" Type="Self.S_Item_New" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_ConditionPrices">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="S_Item_New">
+              <PropertyRef Name="conditionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_Item_Ne__sizeI__50FB042B">
+          <End Role="S_ItemSize" Type="Self.S_ItemSize" Multiplicity="0..1" />
+          <End Role="S_Item_New" Type="Self.S_Item_New" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_ItemSize">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="S_Item_New">
+              <PropertyRef Name="sizeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_Item_Ne__style__52E34C9D">
+          <End Role="S_ItemStyle" Type="Self.S_ItemStyle" Multiplicity="0..1" />
+          <End Role="S_Item_New" Type="Self.S_Item_New" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_ItemStyle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="S_Item_New">
+              <PropertyRef Name="styleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_Item_Ne__typeI__51EF2864">
+          <End Role="S_ItemPrice" Type="Self.S_ItemPrice" Multiplicity="0..1" />
+          <End Role="S_Item_New" Type="Self.S_Item_New" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_ItemPrice">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="S_Item_New">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_User_It__email__6BAEFA67">
+          <End Role="S_User_New" Type="Self.S_User_New" Multiplicity="0..1" />
+          <End Role="S_User_Items" Type="Self.S_User_Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_User_New">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="S_User_Items">
+              <PropertyRef Name="email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_User_It__itemI__6CA31EA0">
+          <End Role="S_Item_New" Type="Self.S_Item_New" Multiplicity="0..1" />
+          <End Role="S_User_Items" Type="Self.S_User_Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_Item_New">
+              <PropertyRef Name="itemId" />
+            </Principal>
+            <Dependent Role="S_User_Items">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_User_Ne__daily__66EA454A">
+          <End Role="S_DailySentence" Type="Self.S_DailySentence" Multiplicity="0..1" />
+          <End Role="S_User_New" Type="Self.S_User_New" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_DailySentence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="S_User_New">
+              <PropertyRef Name="dailySentenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_UserFil__email__314D4EA8">
+          <End Role="S_User_New" Type="Self.S_User_New" Multiplicity="0..1" />
+          <End Role="S_UserFilter" Type="Self.S_UserFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_User_New">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="S_UserFilter">
+              <PropertyRef Name="email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="swishModelStoreContainer">
+          <EntitySet Name="S_Chat" EntityType="Self.S_Chat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_ConditionPrices" EntityType="Self.S_ConditionPrices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_DailySentence" EntityType="Self.S_DailySentence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_FavoriteUsers" EntityType="Self.S_FavoriteUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Item_New" EntityType="Self.S_Item_New" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_ItemPrice" EntityType="Self.S_ItemPrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_ItemSize" EntityType="Self.S_ItemSize" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_ItemStyle" EntityType="Self.S_ItemStyle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_User_Items" EntityType="Self.S_User_Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_User_New" EntityType="Self.S_User_New" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_UserFilter" EntityType="Self.S_UserFilter" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__S_Chat__itemId__28B808A7" Association="Self.FK__S_Chat__itemId__28B808A7">
+            <End Role="S_Item_New" EntitySet="S_Item_New" />
+            <End Role="S_Chat" EntitySet="S_Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_Favorit__email__7AF13DF7" Association="Self.FK__S_Favorit__email__7AF13DF7">
+            <End Role="S_User_New" EntitySet="S_User_New" />
+            <End Role="S_FavoriteUsers" EntitySet="S_FavoriteUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_Favorit__email__7BE56230" Association="Self.FK__S_Favorit__email__7BE56230">
+            <End Role="S_User_New" EntitySet="S_User_New" />
+            <End Role="S_FavoriteUsers" EntitySet="S_FavoriteUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_Item_Ne__condi__53D770D6" Association="Self.FK__S_Item_Ne__condi__53D770D6">
+            <End Role="S_ConditionPrices" EntitySet="S_ConditionPrices" />
+            <End Role="S_Item_New" EntitySet="S_Item_New" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_Item_Ne__sizeI__50FB042B" Association="Self.FK__S_Item_Ne__sizeI__50FB042B">
+            <End Role="S_ItemSize" EntitySet="S_ItemSize" />
+            <End Role="S_Item_New" EntitySet="S_Item_New" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_Item_Ne__style__52E34C9D" Association="Self.FK__S_Item_Ne__style__52E34C9D">
+            <End Role="S_ItemStyle" EntitySet="S_ItemStyle" />
+            <End Role="S_Item_New" EntitySet="S_Item_New" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_Item_Ne__typeI__51EF2864" Association="Self.FK__S_Item_Ne__typeI__51EF2864">
+            <End Role="S_ItemPrice" EntitySet="S_ItemPrice" />
+            <End Role="S_Item_New" EntitySet="S_Item_New" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_User_It__email__6BAEFA67" Association="Self.FK__S_User_It__email__6BAEFA67">
+            <End Role="S_User_New" EntitySet="S_User_New" />
+            <End Role="S_User_Items" EntitySet="S_User_Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_User_It__itemI__6CA31EA0" Association="Self.FK__S_User_It__itemI__6CA31EA0">
+            <End Role="S_Item_New" EntitySet="S_Item_New" />
+            <End Role="S_User_Items" EntitySet="S_User_Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_User_Ne__daily__66EA454A" Association="Self.FK__S_User_Ne__daily__66EA454A">
+            <End Role="S_DailySentence" EntitySet="S_DailySentence" />
+            <End Role="S_User_New" EntitySet="S_User_New" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_UserFil__email__314D4EA8" Association="Self.FK__S_UserFil__email__314D4EA8">
+            <End Role="S_User_New" EntitySet="S_User_New" />
+            <End Role="S_UserFilter" EntitySet="S_UserFilter" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="swishModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="swishDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="S_ConditionPrices" EntityType="swishModel.S_ConditionPrices" />
+          <EntitySet Name="S_DailySentence" EntityType="swishModel.S_DailySentence" />
+          <EntitySet Name="S_Item_New" EntityType="swishModel.S_Item_New" />
+          <EntitySet Name="S_ItemPrice" EntityType="swishModel.S_ItemPrice" />
+          <EntitySet Name="S_ItemSize" EntityType="swishModel.S_ItemSize" />
+          <EntitySet Name="S_ItemStyle" EntityType="swishModel.S_ItemStyle" />
+          <EntitySet Name="S_User_Items" EntityType="swishModel.S_User_Items" />
+          <AssociationSet Name="FK__S_Item_Ne__condi__53D770D6" Association="swishModel.FK__S_Item_Ne__condi__53D770D6">
+            <End Role="S_ConditionPrices" EntitySet="S_ConditionPrices" />
+            <End Role="S_Item_New" EntitySet="S_Item_New" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_Item_Ne__sizeI__50FB042B" Association="swishModel.FK__S_Item_Ne__sizeI__50FB042B">
+            <End Role="S_ItemSize" EntitySet="S_ItemSize" />
+            <End Role="S_Item_New" EntitySet="S_Item_New" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_Item_Ne__style__52E34C9D" Association="swishModel.FK__S_Item_Ne__style__52E34C9D">
+            <End Role="S_ItemStyle" EntitySet="S_ItemStyle" />
+            <End Role="S_Item_New" EntitySet="S_Item_New" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_Item_Ne__typeI__51EF2864" Association="swishModel.FK__S_Item_Ne__typeI__51EF2864">
+            <End Role="S_ItemPrice" EntitySet="S_ItemPrice" />
+            <End Role="S_Item_New" EntitySet="S_Item_New" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_User_It__itemI__59904A2C" Association="swishModel.FK__S_User_It__itemI__59904A2C">
+            <End Role="S_Item_New" EntitySet="S_Item_New" />
+            <End Role="S_User_Items" EntitySet="S_User_Items" />
+          </AssociationSet>
+          <EntitySet Name="S_User_New" EntityType="swishModel.S_User_New" />
+          <AssociationSet Name="FK__S_User_Ne__daily__66EA454A" Association="swishModel.FK__S_User_Ne__daily__66EA454A">
+            <End Role="S_DailySentence" EntitySet="S_DailySentence" />
+            <End Role="S_User_New" EntitySet="S_User_New" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_User_It__email__6BAEFA67" Association="swishModel.FK__S_User_It__email__6BAEFA67">
+            <End Role="S_User_New" EntitySet="S_User_New" />
+            <End Role="S_User_Items" EntitySet="S_User_Items" />
+          </AssociationSet>
+          <EntitySet Name="S_FavoriteUsers" EntityType="swishModel.S_FavoriteUsers" />
+          <AssociationSet Name="FK__S_Favorit__email__7AF13DF7" Association="swishModel.FK__S_Favorit__email__7AF13DF7">
+            <End Role="S_User_New" EntitySet="S_User_New" />
+            <End Role="S_FavoriteUsers" EntitySet="S_FavoriteUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__S_Favorit__email__7BE56230" Association="swishModel.FK__S_Favorit__email__7BE56230">
+            <End Role="S_User_New" EntitySet="S_User_New" />
+            <End Role="S_FavoriteUsers" EntitySet="S_FavoriteUsers" />
+          </AssociationSet>
+          <EntitySet Name="S_Chat" EntityType="swishModel.S_Chat" />
+          <AssociationSet Name="FK__S_Chat__itemId__0C1BC9F9" Association="swishModel.FK__S_Chat__itemId__0C1BC9F9">
+            <End Role="S_Item_New" EntitySet="S_Item_New" />
+            <End Role="S_Chat" EntitySet="S_Chat" />
+          </AssociationSet>
+          <EntitySet Name="S_UserFilter" EntityType="swishModel.S_UserFilter" />
+          <AssociationSet Name="FK__S_UserFil__email__314D4EA8" Association="swishModel.FK__S_UserFil__email__314D4EA8">
+            <End Role="S_User_New" EntitySet="S_User_New" />
+            <End Role="S_UserFilter" EntitySet="S_UserFilter" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="S_ConditionPrices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="condition" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="reduction" Type="Int32" />
+          <NavigationProperty Name="S_Item_New" Relationship="swishModel.FK__S_Item_Ne__condi__53D770D6" FromRole="S_ConditionPrices" ToRole="S_Item_New" />
+        </EntityType>
+        <EntityType Name="S_DailySentence">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sentence" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="S_User_New" Relationship="swishModel.FK__S_User_Ne__daily__66EA454A" FromRole="S_DailySentence" ToRole="S_User_New" />
+        </EntityType>
+        <EntityType Name="S_Item_New">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="image1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="image2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="image3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="image4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="numberOfPoints" Type="Int32" />
+          <Property Name="sizeId" Type="Int32" />
+          <Property Name="typeId" Type="Int32" />
+          <Property Name="styleId" Type="Int32" />
+          <Property Name="conditionId" Type="Int32" />
+          <NavigationProperty Name="S_ConditionPrices" Relationship="swishModel.FK__S_Item_Ne__condi__53D770D6" FromRole="S_Item_New" ToRole="S_ConditionPrices" />
+          <NavigationProperty Name="S_ItemSize" Relationship="swishModel.FK__S_Item_Ne__sizeI__50FB042B" FromRole="S_Item_New" ToRole="S_ItemSize" />
+          <NavigationProperty Name="S_ItemStyle" Relationship="swishModel.FK__S_Item_Ne__style__52E34C9D" FromRole="S_Item_New" ToRole="S_ItemStyle" />
+          <NavigationProperty Name="S_ItemPrice" Relationship="swishModel.FK__S_Item_Ne__typeI__51EF2864" FromRole="S_Item_New" ToRole="S_ItemPrice" />
+          <NavigationProperty Name="S_User_Items" Relationship="swishModel.FK__S_User_It__itemI__59904A2C" FromRole="S_Item_New" ToRole="S_User_Items" />
+          <NavigationProperty Name="S_Chat" Relationship="swishModel.FK__S_Chat__itemId__0C1BC9F9" FromRole="S_Item_New" ToRole="S_Chat" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="latitude" Type="Double" />
+        </EntityType>
+        <EntityType Name="S_ItemPrice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Int32" />
+          <NavigationProperty Name="S_Item_New" Relationship="swishModel.FK__S_Item_Ne__typeI__51EF2864" FromRole="S_ItemPrice" ToRole="S_Item_New" />
+        </EntityType>
+        <EntityType Name="S_ItemSize">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="size" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="S_Item_New" Relationship="swishModel.FK__S_Item_Ne__sizeI__50FB042B" FromRole="S_ItemSize" ToRole="S_Item_New" />
+        </EntityType>
+        <EntityType Name="S_ItemStyle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="style" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="S_Item_New" Relationship="swishModel.FK__S_Item_Ne__style__52E34C9D" FromRole="S_ItemStyle" ToRole="S_Item_New" />
+        </EntityType>
+        <EntityType Name="S_User_Items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="itemId" Type="Int32" />
+          <Property Name="uploadDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="S_Item_New" Relationship="swishModel.FK__S_User_It__itemI__59904A2C" FromRole="S_User_Items" ToRole="S_Item_New" />
+          <NavigationProperty Name="S_User_New" Relationship="swishModel.FK__S_User_It__email__6BAEFA67" FromRole="S_User_Items" ToRole="S_User_New" />
+          <Property Name="itemStatus" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__S_Item_Ne__condi__53D770D6">
+          <End Type="swishModel.S_ConditionPrices" Role="S_ConditionPrices" Multiplicity="0..1" />
+          <End Type="swishModel.S_Item_New" Role="S_Item_New" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_ConditionPrices">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="S_Item_New">
+              <PropertyRef Name="conditionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_Item_Ne__sizeI__50FB042B">
+          <End Type="swishModel.S_ItemSize" Role="S_ItemSize" Multiplicity="0..1" />
+          <End Type="swishModel.S_Item_New" Role="S_Item_New" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_ItemSize">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="S_Item_New">
+              <PropertyRef Name="sizeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_Item_Ne__style__52E34C9D">
+          <End Type="swishModel.S_ItemStyle" Role="S_ItemStyle" Multiplicity="0..1" />
+          <End Type="swishModel.S_Item_New" Role="S_Item_New" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_ItemStyle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="S_Item_New">
+              <PropertyRef Name="styleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_Item_Ne__typeI__51EF2864">
+          <End Type="swishModel.S_ItemPrice" Role="S_ItemPrice" Multiplicity="0..1" />
+          <End Type="swishModel.S_Item_New" Role="S_Item_New" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_ItemPrice">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="S_Item_New">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_User_It__itemI__59904A2C">
+          <End Type="swishModel.S_Item_New" Role="S_Item_New" Multiplicity="0..1" />
+          <End Type="swishModel.S_User_Items" Role="S_User_Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_Item_New">
+              <PropertyRef Name="itemId" />
+            </Principal>
+            <Dependent Role="S_User_Items">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="S_User_New">
+          <Key>
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="phoneNumber" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="profilePicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="residence" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="radius" Type="Int32" Nullable="false" />
+          <Property Name="birthDate" Type="DateTime" Precision="3" />
+          <Property Name="avatarlevel" Type="Int32" />
+          <Property Name="dailySentenceId" Type="Int32" />
+          <NavigationProperty Name="S_DailySentence" Relationship="swishModel.FK__S_User_Ne__daily__66EA454A" FromRole="S_User_New" ToRole="S_DailySentence" />
+          <NavigationProperty Name="S_User_Items" Relationship="swishModel.FK__S_User_It__email__6BAEFA67" FromRole="S_User_New" ToRole="S_User_Items" />
+          <Property Name="numOfPoints" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="S_FavoriteUsers" Relationship="swishModel.FK__S_Favorit__email__7AF13DF7" FromRole="S_User_New" ToRole="S_FavoriteUsers" />
+          <NavigationProperty Name="S_FavoriteUsers1" Relationship="swishModel.FK__S_Favorit__email__7BE56230" FromRole="S_User_New" ToRole="S_FavoriteUsers" />
+          <Property Name="userToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="S_UserFilter" Relationship="swishModel.FK__S_UserFil__email__314D4EA8" FromRole="S_User_New" ToRole="S_UserFilter" />
+          <Property Name="showItemsFeed" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          </EntityType>
+        <Association Name="FK__S_User_Ne__daily__66EA454A">
+          <End Type="swishModel.S_DailySentence" Role="S_DailySentence" Multiplicity="0..1" />
+          <End Type="swishModel.S_User_New" Role="S_User_New" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_DailySentence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="S_User_New">
+              <PropertyRef Name="dailySentenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_User_It__email__6BAEFA67">
+          <End Type="swishModel.S_User_New" Role="S_User_New" Multiplicity="0..1" />
+          <End Type="swishModel.S_User_Items" Role="S_User_Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_User_New">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="S_User_Items">
+              <PropertyRef Name="email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="S_FavoriteUsers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emailLGUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="emailFavUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="S_User_New" Relationship="swishModel.FK__S_Favorit__email__7AF13DF7" FromRole="S_FavoriteUsers" ToRole="S_User_New" />
+          <NavigationProperty Name="S_User_New1" Relationship="swishModel.FK__S_Favorit__email__7BE56230" FromRole="S_FavoriteUsers" ToRole="S_User_New" />
+        </EntityType>
+        <Association Name="FK__S_Favorit__email__7AF13DF7">
+          <End Type="swishModel.S_User_New" Role="S_User_New" Multiplicity="0..1" />
+          <End Type="swishModel.S_FavoriteUsers" Role="S_FavoriteUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_User_New">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="S_FavoriteUsers">
+              <PropertyRef Name="emailLGUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__S_Favorit__email__7BE56230">
+          <End Type="swishModel.S_User_New" Role="S_User_New" Multiplicity="0..1" />
+          <End Type="swishModel.S_FavoriteUsers" Role="S_FavoriteUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_User_New">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="S_FavoriteUsers">
+              <PropertyRef Name="emailFavUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="S_Chat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="itemId" Type="Int32" />
+          <Property Name="uploadUser" Type="Int32" Nullable="false" />
+          <Property Name="requestUser" Type="Int32" Nullable="false" />
+          <Property Name="lastMessageDate" Type="DateTime" Precision="3" />
+          <Property Name="chatStatus" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="S_Item_New" Relationship="swishModel.FK__S_Chat__itemId__0C1BC9F9" FromRole="S_Chat" ToRole="S_Item_New" />
+          <Property Name="requestConfirm" Type="Boolean" />
+          <Property Name="uploadConfirm" Type="Boolean" />
+          <Property Name="openChatDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK__S_Chat__itemId__0C1BC9F9">
+          <End Type="swishModel.S_Item_New" Role="S_Item_New" Multiplicity="0..1" />
+          <End Type="swishModel.S_Chat" Role="S_Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_Item_New">
+              <PropertyRef Name="itemId" />
+            </Principal>
+            <Dependent Role="S_Chat">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="S_UserFilter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="keyWordType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="keyWord" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="S_User_New" Relationship="swishModel.FK__S_UserFil__email__314D4EA8" FromRole="S_UserFilter" ToRole="S_User_New" />
+        </EntityType>
+        <Association Name="FK__S_UserFil__email__314D4EA8">
+          <End Type="swishModel.S_User_New" Role="S_User_New" Multiplicity="0..1" />
+          <End Type="swishModel.S_UserFilter" Role="S_UserFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_User_New">
+              <PropertyRef Name="email" />
+            </Principal>
+            <Dependent Role="S_UserFilter">
+              <PropertyRef Name="email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="swishModelStoreContainer" CdmEntityContainer="swishDBContext">
+          <EntitySetMapping Name="S_ConditionPrices">
+            <EntityTypeMapping TypeName="swishModel.S_ConditionPrices">
+              <MappingFragment StoreEntitySet="S_ConditionPrices">
+                <ScalarProperty Name="reduction" ColumnName="reduction" />
+                <ScalarProperty Name="condition" ColumnName="condition" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_DailySentence">
+            <EntityTypeMapping TypeName="swishModel.S_DailySentence">
+              <MappingFragment StoreEntitySet="S_DailySentence">
+                <ScalarProperty Name="sentence" ColumnName="sentence" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Item_New">
+            <EntityTypeMapping TypeName="swishModel.S_Item_New">
+              <MappingFragment StoreEntitySet="S_Item_New">
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="conditionId" ColumnName="conditionId" />
+                <ScalarProperty Name="styleId" ColumnName="styleId" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="sizeId" ColumnName="sizeId" />
+                <ScalarProperty Name="numberOfPoints" ColumnName="numberOfPoints" />
+                <ScalarProperty Name="image4" ColumnName="image4" />
+                <ScalarProperty Name="image3" ColumnName="image3" />
+                <ScalarProperty Name="image2" ColumnName="image2" />
+                <ScalarProperty Name="image1" ColumnName="image1" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_ItemPrice">
+            <EntityTypeMapping TypeName="swishModel.S_ItemPrice">
+              <MappingFragment StoreEntitySet="S_ItemPrice">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_ItemSize">
+            <EntityTypeMapping TypeName="swishModel.S_ItemSize">
+              <MappingFragment StoreEntitySet="S_ItemSize">
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_ItemStyle">
+            <EntityTypeMapping TypeName="swishModel.S_ItemStyle">
+              <MappingFragment StoreEntitySet="S_ItemStyle">
+                <ScalarProperty Name="style" ColumnName="style" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_User_Items">
+            <EntityTypeMapping TypeName="swishModel.S_User_Items">
+              <MappingFragment StoreEntitySet="S_User_Items">
+                <ScalarProperty Name="itemStatus" ColumnName="itemStatus" />
+                <ScalarProperty Name="uploadDate" ColumnName="uploadDate" />
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_User_New">
+            <EntityTypeMapping TypeName="swishModel.S_User_New">
+              <MappingFragment StoreEntitySet="S_User_New">
+                <ScalarProperty Name="showItemsFeed" ColumnName="showItemsFeed" />
+                <ScalarProperty Name="userToken" ColumnName="userToken" />
+                <ScalarProperty Name="numOfPoints" ColumnName="numOfPoints" />
+                <ScalarProperty Name="dailySentenceId" ColumnName="dailySentenceId" />
+                <ScalarProperty Name="avatarlevel" ColumnName="avatarlevel" />
+                <ScalarProperty Name="birthDate" ColumnName="birthDate" />
+                <ScalarProperty Name="radius" ColumnName="radius" />
+                <ScalarProperty Name="residence" ColumnName="residence" />
+                <ScalarProperty Name="profilePicture" ColumnName="profilePicture" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_FavoriteUsers">
+            <EntityTypeMapping TypeName="swishModel.S_FavoriteUsers">
+              <MappingFragment StoreEntitySet="S_FavoriteUsers">
+                <ScalarProperty Name="emailFavUser" ColumnName="emailFavUser" />
+                <ScalarProperty Name="emailLGUser" ColumnName="emailLGUser" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Chat">
+            <EntityTypeMapping TypeName="swishModel.S_Chat">
+              <MappingFragment StoreEntitySet="S_Chat">
+                <ScalarProperty Name="openChatDate" ColumnName="openChatDate" />
+                <ScalarProperty Name="uploadConfirm" ColumnName="uploadConfirm" />
+                <ScalarProperty Name="requestConfirm" ColumnName="requestConfirm" />
+                <ScalarProperty Name="chatStatus" ColumnName="chatStatus" />
+                <ScalarProperty Name="lastMessageDate" ColumnName="lastMessageDate" />
+                <ScalarProperty Name="requestUser" ColumnName="requestUser" />
+                <ScalarProperty Name="uploadUser" ColumnName="uploadUser" />
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_UserFilter">
+            <EntityTypeMapping TypeName="swishModel.S_UserFilter">
+              <MappingFragment StoreEntitySet="S_UserFilter">
+                <ScalarProperty Name="keyWord" ColumnName="keyWord" />
+                <ScalarProperty Name="keyWordType" ColumnName="keyWordType" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

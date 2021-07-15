@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+
+        function PostUser() {
+            console.log("in function ")
+
+            var user = {
+                firstName: $("#fn").val(),
+                lastName: $("#ln").val(),
+                email: $("#em").val(),
+                password: $("#pas").val(),
+                birthDate: $("#bd").val(),
+                itemViewingMethod: $("#item").val(),
+                phoneNumber: $("#pn").val(),
+                radius: $("#rad").val(),
+                residence: $("#res").val(),
+                id: 7
+            }
+            console.log("in function: " + user)
+
+            $.ajax({
+                dataType: "json",			                //סוג הנתונים שאנחנו מצפים לקבל מהשרת
+                url: "/api/User",			            //הכתובת לשרת ולפונקציה
+                contentType: "application/json",		   //סוג הנתונים שאנחנו שולחים לשרת
+                type: "post",				              //סוג הפעולה
+                data: JSON.stringify(user),			  //הנתונים עצמם שאנחנו שולחים
+                success: function (data) {
+                    //פונקציה  שתופעל לאחר הצלחה
+                    $("#msg").html(data);
+                    console.log("good- post func!");
+                },
+                error: function (err) {
+                    //פונקציה שתופעל במקרה של שגיאה
+                    $("#msg").html(err.responseText);
+                    console.log("error");
+
+                }
+            });
+            console.log("after function")
+            alert("אחרי לחיצה")
+        }
+
+        //alert("לחצתי")
+        //var user = {
+        //    firstName: "meytal",
+        //    lastName: "m",
+        //    email: "t@gmail.com",
+        //    password: 1234,
+        //    birthDate: 1996-10-29,
+        //    itemViewingMethod: "L",
+        //    phoneNumber: 526022153,
+        //    radius: 2,
+        //    residence: "kadima"
+        //}
+        //var user = {
+        //    firstName: $("#fn").val(),
+        //    lastName: $("#ln").val(),
+        //    email: $("#em").val(),
+        //    password: $("#pas").val(),
+        //    birthDate: $("#bd").val(),
+        //    itemViewingMethod: $("#item").val(),
+        //    phoneNumber: $("#pn").val(),
+        //    radius: $("#rad").val(),
+        //    residence: $("#res").val()
+        //}
+
+        //$.ajax({
+        //    dataType: "json",			                //סוג הנתונים שאנחנו מצפים לקבל מהשרת
+        //    url: "/api/User",			            //הכתובת לשרת ולפונקציה
+        //    contentType: "application/json",		   //סוג הנתונים שאנחנו שולחים לשרת
+        //    type: "post",				              //סוג הפעולה
+        //    data: JSON.stringify(user),			  //הנתונים עצמם שאנחנו שולחים
+        //    success: function (data) {
+        //    },
+        //    error: function (err) {
+
+        //    }
+        //});
+        //alert("לחצתי")
+
+    </script>
+</head>
+<body>
+    <span id="msg"></span>
+    <input type="text" placeholder="first name" id="fn"/>
+    <input type="text" placeholder="last name" id="ln"/>
+    <input type="text" placeholder="password" id="pas"/>
+    <input type="text" placeholder="email" id="em"/>
+    <input type="text" placeholder="birth date" id="bd"/>
+    <input type="text" placeholder="item viewing" id="item"/>
+    <input type="text" placeholder="phone number" id="pn"/>
+    <input type="text" placeholder="radius" id="rad"/>
+    <input type="text" placeholder="residence" id="res"/>
+    <input type="button" value="insert" onclick="PostUser()"/>
+</body>
+</html>
